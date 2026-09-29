@@ -1,17 +1,21 @@
-#include "Entity.hpp"
+#include "Components.hpp"
+#include "Registry.hpp"
 #include "SparseArray.hpp"
 #include <iostream>
 
 int main(void)
 {
-    auto sparse_array = SparseArray<Entity>();
+    auto registry = Registry();
 
-    auto entity1 = Entity();
-    auto entity2 = Entity();
+    registry.registerComponent<Component>();
+    auto entity1 = registry.spawnEntity();
+    auto entity2 = registry.spawnEntity();
+    auto entity3 = registry.spawnEntity();
 
-    sparse_array.emplace_at(0);
-    // sparse_array.insert_at(0, Entity());
-    // sparse_array.insert_at(1, Entity());
-    std::cout << sparse_array.size() << std::endl;
+    registry.addComponent<Component>(entity1, Component());
+    registry.addComponent<Component>(entity2, Component());
+
+    auto components = registry.getComponents<Component>();
+    std::cout << components.size() << std::endl;
     return 0;
 }
