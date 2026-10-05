@@ -14,3 +14,7 @@ spec:
     env:
     - name: FOO
       value: "bar"
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: hello-world-pvc
